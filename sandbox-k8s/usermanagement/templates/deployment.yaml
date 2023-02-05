@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cleaning.fullname" . }}
+  name: {{ include "usermanagement.fullname" . }}
   labels:
-    {{- include "cleaning.labels" . | nindent 4 }}
+    {{- include "usermanagement.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "cleaning.selectorLabels" . | nindent 6 }}
+      {{- include "usermanagement.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         releaseTime: {{ dateInZone "2006-01-02 15:04:05Z" (now) "UTC"| quote }}
       labels:
-        {{- include "cleaning.selectorLabels" . | nindent 8 }}
+        {{- include "usermanagement.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "cleaning.serviceAccountName" . }}
+      serviceAccountName: {{ include "usermanagement.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -39,7 +39,7 @@ spec:
             - name: FLASK_APP
               value: "main"
             - name: USER_NAME
-              value: "cleaning-sandbox"
+              value: "usermanagement-sandbox"
             - name: PASSWORD
               value: "ypa8nhj7tdhhyt7WHZ"
             - name: VAULT_URL
