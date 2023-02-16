@@ -1,4 +1,4 @@
-# Default values for cleaning.
+# Default values for crm-backend.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -17,7 +17,7 @@ fullnameOverride: ""
 serviceAccount:
   create: true
   annotations: {}
-  name: "cleaning-sa"
+  name: "crm-backend-sa"
 
 podAnnotations: {
 }
@@ -54,7 +54,7 @@ ingress:
     alb.ingress.kubernetes.io/manage-backend-security-group-rules: "true"
 
   hosts:
-    - host: sandbox-cleaning.between.as
+    - host: sandbox-crm-api.between.as
       paths:
         - path: /*
           pathType: ImplementationSpecific

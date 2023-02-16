@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "cleaning.fullname" . }}
+  name: {{ include "crm-backend.fullname" . }}
   labels:
-    {{- include "cleaning.labels" . | nindent 4 }}
+    {{- include "crm-backend.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "cleaning.selectorLabels" . | nindent 6 }}
+      {{- include "crm-backend.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         releaseTime: {{ dateInZone "2006-01-02 15:04:05Z" (now) "UTC"| quote }}
       labels:
-        {{- include "cleaning.selectorLabels" . | nindent 8 }}
+        {{- include "crm-backend.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "cleaning.serviceAccountName" . }}
+      serviceAccountName: {{ include "crm-backend.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -39,7 +39,7 @@ spec:
             - name: FLASK_APP
               value: "main"
             - name: USER_NAME
-              value: "cleaning-sandbox"
+              value: "crm-backend-sandbox"
             - name: PASSWORD
               value: "iBEQorVXHoZsTey8RFqc"
             - name: VAULT_URL

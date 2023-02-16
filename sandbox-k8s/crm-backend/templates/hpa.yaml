@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "cleaning.fullname" . }}
+  name: {{ include "crm-backend.fullname" . }}
   labels:
-    {{- include "cleaning.labels" . | nindent 4 }}
+    {{- include "crm-backend.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "cleaning.fullname" . }}
+    name: {{ include "crm-backend.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
