@@ -54,7 +54,7 @@ ingress:
     alb.ingress.kubernetes.io/manage-backend-security-group-rules: "true"
 
   hosts:
-    - host: development-usermanagement.between.as
+    - host: sandbox-usermanagement.between.as
       paths:
         - path: /*
           pathType: ImplementationSpecific
