@@ -2,14 +2,14 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: {{ include "crm-web.fullname" . }}
+  name: {{ include "usermanagement.fullname" . }}
   labels:
-    {{- include "crm-web.labels" . | nindent 4 }}
+    {{- include "usermanagement.labels" . | nindent 4 }}
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: {{ include "crm-web.fullname" . }}
+    name: {{ include "usermanagement.fullname" . }}
   minReplicas: {{ .Values.autoscaling.minReplicas }}
   maxReplicas: {{ .Values.autoscaling.maxReplicas }}
   metrics:
