@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "crm-backend.fullname" . }}
+  name: {{ include "crm.fullname" . }}
   labels:
-    {{- include "crm-backend.labels" . | nindent 4 }}
+    {{- include "crm.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "crm-backend.selectorLabels" . | nindent 6 }}
+      {{- include "crm.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         releaseTime: {{ dateInZone "2006-01-02 15:04:05Z" (now) "UTC"| quote }}
       labels:
-        {{- include "crm-backend.selectorLabels" . | nindent 8 }}
+        {{- include "crm.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "crm-backend.serviceAccountName" . }}
+      serviceAccountName: {{ include "crm.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
