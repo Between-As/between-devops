@@ -39,7 +39,7 @@ spec:
             - name: FLASK_APP
               value: "main"
             - name: USER_NAME
-              value: "crm-backend-sandbox"
+              value: "crm-sandbox"
             - name: PASSWORD
               value: "rEdKCiYGTQ6gFfHXmh2s"
             - name: VAULT_URL
