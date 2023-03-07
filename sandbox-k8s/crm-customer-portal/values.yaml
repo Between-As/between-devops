@@ -1,4 +1,4 @@
-# Default values for crm-backend.
+# Default values for crm-customer-portal.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -17,7 +17,7 @@ fullnameOverride: ""
 serviceAccount:
   create: true
   annotations: {}
-  name: "crm-backend-sa"
+  name: "crm-customer-portal-sa"
 
 podAnnotations: {
 }
@@ -43,18 +43,18 @@ ingress:
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/subnets: 'subnet-05bec0579d04efe59,subnet-0bde6d188ae36b01e,subnet-03e1d882c3971f72b'
+    alb.ingress.kubernetes.io/subnets: 'subnet-0c5967d7faa5c8c44,subnet-0819b34b15e27c94e,subnet-063c6031bcaf60b8f'
     alb.ingress.kubernetes.io/group.name: "apps-sandbox"
     #alb.ingress.kubernetes.io/security-groups: 'sg-095e0bd3011b98bdb'
     alb.ingress.kubernetes.io/healthcheck-path: /services/health
     alb.ingress.kubernetes.io/ssl-redirect: '443'
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
-    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:eu-west-1:162725507128:certificate/05715b27-21d4-4737-bc6a-cb1e171293ce"
+    alb.ingress.kubernetes.io/certificate-arn: "arn:aws:acm:eu-west-1:159821294083:certificate/4cd1c9ae-7c27-4a3a-be69-e149d911bdc8"
     alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-TLS-1-2-Ext-2018-06
     alb.ingress.kubernetes.io/manage-backend-security-group-rules: "true"
 
   hosts:
-    - host: sandbox-crm-api.between.as
+    - host: sandbox-crm-customer-portal.between.as
       paths:
         - path: /*
           pathType: ImplementationSpecific
