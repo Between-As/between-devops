@@ -1,28 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "crm-web-app.fullname" . }}
+  name: {{ include "crmweb.fullname" . }}
   labels:
-    {{- include "crm-web-app.labels" . | nindent 4 }}
+    {{- include "crmweb.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "crm-web-app.selectorLabels" . | nindent 6 }}
+      {{- include "crmweb.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       annotations:
         releaseTime: {{ dateInZone "2006-01-02 15:04:05Z" (now) "UTC"| quote }}
       labels:
-        {{- include "crm-web-app.selectorLabels" . | nindent 8 }}
+        {{- include "crmweb.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "crm-web-app.serviceAccountName" . }}
+      serviceAccountName: {{ include "crmweb.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
