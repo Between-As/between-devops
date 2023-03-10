@@ -1,4 +1,4 @@
-# Default values for crm-web-app.
+# Default values for crmweb.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
@@ -17,7 +17,7 @@ fullnameOverride: ""
 serviceAccount:
   create: true
   annotations: {}
-  name: "crm-web-app-sa"
+  name: "crmweb-sa"
 
 podAnnotations: {
 }
